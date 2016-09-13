@@ -2,19 +2,22 @@
 
 var App = {
 //create deck
+  deck : [],
 
   hearts : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
   diamonds : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
   clubs : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
   spades : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
 
-  deck : [this.hearts, this.diamonds, this.clubs, this.spades],
-
   //create player, dealer, stack, pot variables
   playerCards : 0,
   dealerCards : 0,
   playerChipStack : 100,
   potValue : 0,
+
+  buildDeck: function() {
+    App.deck.push(App.hearts, App.diamonds, App.clubs, App.spades);
+  },
 
   //create bet function to subtract bet from player's chips
   placeBet: function(chip) {
@@ -37,6 +40,7 @@ var App = {
 
   //initial deal function
   initialDeal: function() {
+    App.buildDeck();
 
   },
 
