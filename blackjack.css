@@ -1,0 +1,33 @@
+#board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardhand {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background: grey;
+  height: 30vmin;
+  width: 30vmin;
+  border: 2px solid black;
+}
+#dealer
+{
+
+}
+
+#player
+{
+
+}
+
+.card {
+  display: inline-block;
+  background: green;
+  width: 42px;
+  height: 50px;
+  border: 1px solid black;
+}

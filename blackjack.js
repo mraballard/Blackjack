@@ -8,19 +8,30 @@ var App = {
   clubs : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
   spades : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
 
-  deck : [hearts, diamonds, clubs, spades],
+  deck : [this.hearts, this.diamonds, this.clubs, this.spades],
 
-  //create player and dealer variables
-  player : 0,
-  dealer : 0,
+  //create player, dealer, stack, pot variables
+  playerCards : 0,
+  dealerCards : 0,
+  playerChipStack : 100,
+  potValue : 0,
 
   //create bet function to subtract bet from player's chips
   placeBet: function(chip) {
-
+    App.playerChipStack -= chip;
+    App.potValue += chip;
+    return App.potValue;
   },
 
   //create deal function
   dealCard: function() {
+    var suit = Math.floor(Math.random()*4);
+    var card = Math.floor(Math.random()*App.deck[suit].length);
+
+    dealtCard = App.deck[suit][card]; //select random card from deck.
+    App.deck[suit].splice(card,1);  //removes dealtCard from deck
+
+    return dealtCard;
 
   },
 
