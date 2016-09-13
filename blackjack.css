@@ -27,7 +27,14 @@ body {
 
 }
 
-.card {
+.dealerCard {
+  /*display: inline-block;*/
+  background: green;
+  width: 42px;
+  height: 50px;
+  border: 1px solid black;
+}
+.playerCard {
   /*display: inline-block;*/
   background: green;
   width: 42px;

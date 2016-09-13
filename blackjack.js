@@ -16,7 +16,6 @@ var App = {
   potValue : 0,
 
   buildDeck: function() {
-    console.log("buildDeck function");
     App.deck.push(App.hearts, App.diamonds, App.clubs, App.spades);
   },
 
@@ -39,17 +38,15 @@ var App = {
     var card = Math.floor(Math.random()*App.deck[suit].length);
     var dealtCard = [];
     dealtCard.push(App.deck[suit][card]); //adds random card to array
-    dealtCard.push({'Suit': App.suits[suit]}); //add random suit of card to array
+    dealtCard.push({'suit': App.suits[suit]}); //add random suit of card to array
     App.deck[suit].splice(card,1);  //removes dealtCard from deck
 
-    console.log(dealtCard);
     return dealtCard;
 
   },
 
   //initial deal function
   initialDeal: function() {
-    console.log("initial deal function");
     App.buildDeck();
     var initialDeal = [];
     for (var i = 0; i < 4; i++) {
@@ -60,10 +57,11 @@ var App = {
         App.dealerCards.push(initialDeal[i]);
       }
     }
-    // console.log(App.playerCards);
-    // console.log(App.dealerCards);
+    console.log(App.playerCards);
+    console.log(App.dealerCards);
     // console.log(initialDeal);
-    UI.showCard(initialDeal);
+    console.log('going to showcard function');
+    UI.showCard(App.playerCards,App.dealerCards);
   },
 
   //win function adds pot x2 to player's chips
@@ -134,10 +132,13 @@ var UI = {
   },
 
   //show dealt cards for player and dealer
-  showCard: function(cards) {
-    cards.forEach(function(index) {
-      $('.card').eq(index).text(cards[index]);
-    });
+  showCard: function(playerCards, dealerCards) {
+    for (var i = 0; i < playerCards.length; i++) {
+      $('.playerCard').eq(i).text(Object.keys(playerCards[i][0]) + ' of '+playerCards[i][1].suit);
+    }
+    for (var i = 0; i < dealerCards.length; i++) {
+      $('.dealerCard').eq(i).text(Object.keys(dealerCards[i][0]) + ' of '+dealerCards[i][1].suit);
+    }
   },
 
   //add cards for hit on player or dealer
