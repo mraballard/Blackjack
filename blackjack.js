@@ -95,8 +95,9 @@ var UI = {
 
   //deal click calls App.initialDeal function
   onDealButton: function() {
-    $('#dealbutton').on('click', function(){
+    $('#dealButton').on('click', function(){
       App.initialDeal();
+      $('#dealButton').attr("disabled", true);
     });
 
   },
@@ -134,10 +135,12 @@ var UI = {
   //show dealt cards for player and dealer
   showCard: function(playerCards, dealerCards) {
     for (var i = 0; i < playerCards.length; i++) {
-      $('.playerCard').eq(i).text(Object.keys(playerCards[i][0]) + ' of '+playerCards[i][1].suit);
+      $newCard= Html.createCard(Object.keys(playerCards[i][0]),playerCards[i][1].suit,'playerCard');
+      $('#player').append($newCard);
     }
     for (var i = 0; i < dealerCards.length; i++) {
-      $('.dealerCard').eq(i).text(Object.keys(dealerCards[i][0]) + ' of '+dealerCards[i][1].suit);
+      $newCard = Html.createCard(Object.keys(dealerCards[i][0]),dealerCards[i][1].suit,'dealerCard');
+      $('#dealer').append($newCard);
     }
   },
 
@@ -162,6 +165,14 @@ var UI = {
 };
 
 /////////////////HTML
+var Html = {
+  createCard: function(value, suit, className) {
+    var $newCard = $('<div></div>');
+    $newCard.addClass(className);
+    $newCard.html(value + suit);
+    return $newCard;
+  }
+};
 
 //Initial Events
 window.onload = function() {
