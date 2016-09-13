@@ -23,7 +23,8 @@ var App = {
   placeBet: function(chip) {
     App.playerChipStack -= chip;
     App.potValue += chip;
-    return App.potValue;
+    UI.showBet(App.potValue);
+    UI.onDealButton();
   },
 
   //create deal function
@@ -40,8 +41,8 @@ var App = {
 
   //initial deal function
   initialDeal: function() {
+    UI.placeYourBets();
     App.buildDeck();
-
   },
 
   //win function adds pot x2 to player's chips
@@ -67,7 +68,10 @@ var UI = {
 
   //chip click calls App.bet()
   onChipClick: function() {
-
+    $('#chips').on('click', function(){
+      nickel = parseInt($('#chips').attr("data-set-id"));
+      App.placeBet(nickel);
+    });
   },
 
   //deal click calls App.initialDeal function
@@ -89,7 +93,8 @@ var UI = {
 
   //show "place your bets" in h1
   placeYourBets: function() {
-
+    var $header = $('h1').text("Place Your Bets!");
+    UI.onChipClick();
   },
 
   //show total of player's chips
@@ -99,7 +104,9 @@ var UI = {
 
   //show value of player's bet
   showBet: function(bet) {
-
+    //called by App.placeBet() to update DOM with bet
+    var $pot = $('#pot');
+    $pot.text('$'+bet);
   },
 
   //show dealt cards for player and dealer
@@ -128,3 +135,8 @@ var UI = {
 };
 
 /////////////////HTML
+
+//Initial Events
+window.onload = function() {
+  UI.placeYourBets();
+};
