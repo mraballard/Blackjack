@@ -41,10 +41,9 @@ var App = {
     if (App.playerChipStack < chip) {  //check if player has enough chips
       UI.showMessage('Not enough chips in your stack! Click "Deal"');
     } else {
-      console.log(chip);
       App.playerChipStack -= chip;
       App.potValue += chip;
-      console.log(App.potValue);
+      UI.updatePlayerStack();
     }
     UI.showBet(App.potValue);
     UI.showMessage("Add to your Bet, or click 'Deal!'");
@@ -71,7 +70,6 @@ var App = {
     App.reset();
     var initialDeal = [];
     for (var i = 0; i < 4; i++) {
-      console.log(i);
       initialDeal.push(App.dealCard());
       if (i%2 === 0) {
         App.playerCards.push(initialDeal[i]);
@@ -99,14 +97,41 @@ var App = {
     if (App.calculateTotal(App.playerCards) > 21) {
       App.bust('Player');
     }
+  },
 
+  //stay
+  stay: function() {
+    var dealerTotal = App.calculateTotal(App.dealerCards);
+    var playerTotal = App.calculateTotal(App.playerCards)
+
+    if (dealerTotal > 21) {
+      App.playerWins();
+    }
+    else if (dealerTotal === playerTotal && dealerTotal > 16) {
+      App.tieGame();
+    }
+    else if (dealerTotal < playerTotal) {
+      App.dealerCards.push(App.dealCard());
+      UI.addCard(App.dealerCards[App.dealerCards.length-1], 'dealerCard');
+      App.stay();
+    }
+    else {
+      App.dealerWins();
+    }
   },
 
 
 
   //win function adds pot x2 to player's chips
   playerWins: function() {
+    App.playerChipStack = App.playerChipStack +(App.potValue * 2);
+    UI.showMessage('You win! You now have $'+App.playerChipStack);
+    UI.endGame();
+  },
 
+  dealerWins: function() {
+    UI.showMessage('Dealer wins!');
+    UI.endGame();
   },
 
   //lose function empties pot value
@@ -117,8 +142,10 @@ var App = {
   },
 
   //push function returns pot value to player
-  push: function() {
-
+  tieGame: function() {
+    App.playerChipStack += App.potValue;
+    UI.showMessage('Push');
+    UI.endGame();
   },
 
 };
@@ -130,7 +157,6 @@ var UI = {
   //chip click calls App.bet()
   onChipClick: function() {
     $('#chips').on('click', function(){
-      console.log('clicked chip');
       nickel = parseInt($('#chips').attr("data-set-id"));
       App.placeBet(nickel);
     });
@@ -150,11 +176,15 @@ var UI = {
     $('#hitButton').on('click', function(){
       App.hit();
     });
+    $('#hitButton').attr("disabled", true);
   },
 
   //stay click calls App.stay() which adds cards to dealer's hand until player score is beat or dealer busts
   onStayButton: function() {
-
+    $('#stayButton').on('click', function(){
+      App.stay();
+    });
+    $('#stayButton').attr("disabled", true);
   },
 
 //DOM manipulation
@@ -176,7 +206,7 @@ var UI = {
 
   //show total of player's chips
   updatePlayerStack: function(bet) {
-
+    $('#chipStack').text('$'+App.playerChipStack);
   },
 
   //show value of player's bet
@@ -214,12 +244,13 @@ var UI = {
 
   endGame: function() {
     // debugger;
+    UI.updatePlayerStack();
     $('#hitButton').attr("disabled", true);
     $('#stayButton').attr("disabled", true);
     $resetButton = $('<button></button>');
     $resetButton.attr('id','endGame');
     $resetButton.text('Reset Game');
-    $('body').prepend($resetButton);
+    $('body').append($resetButton);
     $resetButton.on('click', function() {
       UI.reset();
       App.reset();
@@ -244,4 +275,5 @@ window.onload = function() {
   UI.onChipClick();
   UI.onHitButton();
   UI.onStayButton();
+  UI.updatePlayerStack();
 };
