@@ -74,3 +74,12 @@ body {
   height: 5vmin;
   width: 30vmin;
 }
+
+#endGame {
+  background: black;
+  height: 10vw;
+  width: 10vw;
+  margin: 5vh auto;
+  text-align: center;
+  color: white;
+}
