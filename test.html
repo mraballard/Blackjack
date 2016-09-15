@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="test.css" media="screen" title="no title" charset="utf-8">
+    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+    <script type="text/javascript" src='blackjack.js'></script>
+  </head>
+  <body>
+
+    <aside id="left">
+      <div id="dealButtonDiv">
+        <button id="dealButton" type="button" name="deal" class="green">Deal</button>
+      </div>
+      <div id="actionButtons">
+        <button id="hitButton" type="button" name="hit" class="green">Hit</button>
+        <button id="stayButton" type="button" name="stay" class="green">Stay</button>
+      </div>
+      <div class="playerChips">
+        <button id="chipButton" data-set-id="5" type="button" name="chips">$5</button>
+        <span id="chipValue">$100</span>
+      </div>
+    </aside>
+
+    <main id = "board">
+      <h1>Header One</h1>
+      <div id="dealer" class="cardSection">
+        <span class="cardTotal" id="dealerTotal">17</span>
+        <div class="card">1</div>
+        <div class="card">2</div>
+        <div class="card">3</div>
+        <div class="card">4</div>
+        <div class="card">5</div>
+      </div>
+
+      <div id="player" class="cardSection">
+        <span class="cardTotal" id="playerTotal">17</span>
+        <div class="card">1</div>
+        <div class="card">2</div>
+        <div class="card">3</div>
+        <div class="card">4</div>
+        <div class="card">5</div>
+      </div>
+
+    </main>
+
+    <aside id="right">
+      <div id="pot">
+        <span id="potTotal">$500</span>
+      </div>
+    </aside>
+
+  </body>
+</html>
