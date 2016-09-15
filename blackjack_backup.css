@@ -1,88 +1,60 @@
 body {
-  display: flex;
-  flex-direction: row;
-  /*width: 100vw;*/
-  /*justify-content: space-between;*/
-}
 
-div {
-  border: 1px solid black;
-}
-aside {
-  background: pink;
-  height: 100vh;
-  width: 20vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#right {
-  justify-content: center;
-  width: 30vw;
-}
-#dealButtonDiv {
-  /*display: flex;
-  align-items: flex-end;*/
-  /*height: 20vh;*/
-  background: white;
-  margin: 30% auto 0 auto;
-}
-#actionButtons {
-  /*display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: flex-end;*/
-  /*height: 40vh;*/
-  background: white;
-}
-main {
-  background: grey;
-  height: 100vh;
-  width: 50vmin;
-  display: flex;
-  flex-direction: column;
 }
 h1 {
   text-align: center;
   font-family: Helvetica;
 }
-.cardSection {
+#board {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardhand {
+  display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap;
-  height: 50%;
-  width: 100%;
-  background: yellow;
+  background: grey;
+  height: 30vmin;
+  width: 60vmin;
+  border: 2px solid black;
 }
-#dealer {
+#dealer
+{
 
 }
-#player {
-  background: blue;
+
+#player
+{
+
 }
-.card {
+
+.dealerCard {
+  /*display: inline-block;*/
   background: green;
   width: 42px;
-  height: 59px;
+  height: 50px;
+  border: 1px solid black;
+}
+.playerCard {
+  /*display: inline-block;*/
+  background: green;
+  width: 42px;
+  height: 50px;
   border: 1px solid black;
 }
 
-.cardTotal {
-  background: orange;
-  align-self: flex-start;
-  text-align: right;
-  font-size: 3em;
-}
-#dealerTotal {
-}
-.playerChips {
-
+#playerchips {
+  float: left;
+  width: 15vmin;
+  height: 15vmin;
+  background: yellow;
+  margin-top: 250px;
 }
 
-#chipButton {
+#chips {
   width: 15vmin;
   height: 15vmin;
   background: green;
@@ -98,6 +70,16 @@ h1 {
   font-size: 3em;
 }
 
+#hit-and-stay {
+  display: flex;
+  margin-top: 20px;
+  /*border: 2px solid black;*/
+  align-items: center;
+  justify-content: space-around;
+  /*height: 5vmin;*/
+  width: 60vmin;
+}
+
 #endGame {
   background: black;
   height: 10vw;
@@ -105,6 +87,10 @@ h1 {
   margin: 5vh auto;
   text-align: center;
   color: white;
+}
+
+button {
+  padding: 0px 15px 0px 15px;
 }
 
 .green {

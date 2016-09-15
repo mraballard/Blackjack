@@ -174,9 +174,9 @@ var UI = {
 
   //chip click calls App.bet()
   onChipClick: function() {
-    $('#chips').on('click', function(){
+    $('#chipButton').on('click', function(){
       $('#dealButton').attr("disabled", false);
-      nickel = parseInt($('#chips').attr("data-set-id"));
+      nickel = parseInt($('#chipButton').attr("data-set-id"));
       App.placeBet(nickel);
     });
   },
@@ -210,12 +210,14 @@ var UI = {
 
   reset: function() {
     // debugger;
-    $('#dealer').children().remove();
-    $('#player').children().remove();
-    $('#pot').text('');
+    // $('#dealer').children().remove();
+    // $('#player').children().remove();
+    $('.card').remove();
+    $('#potTotal').text('');
+    $('.cardTotal').text('');
     $('#dealButton').attr("disabled", true);
     $('#endGame').remove();
-    $('#chips').attr("disabled", false);
+    $('#chipButton').attr("disabled", false);
   },
 
   //show "place your bets" in h1
@@ -225,13 +227,13 @@ var UI = {
 
   //show total of player's chips
   updatePlayerStack: function(bet) {
-    $('#chipStack').text('$'+App.playerChipStack);
+    $('#chipValue').text('$'+App.playerChipStack);
   },
 
   //show value of player's bet
   showBet: function(bet) {
     //called by App.placeBet() to update DOM with bet
-    var $pot = $('#pot');
+    var $pot = $('#potTotal');
     $pot.text('$'+bet);
   },
 
@@ -239,26 +241,32 @@ var UI = {
   deal: function(playerCards, dealerCards) {
     //debugger;
     for (var i = 0; i < playerCards.length; i++) {
-      $newCard= Html.createCard(Object.keys(playerCards[i][0]),playerCards[i][1].suit,'playerCard');
+      $newCard= Html.createCard(Object.keys(playerCards[i][0]),playerCards[i][1].suit,'card');
       $('#player').append($newCard);
     }
     for (var i = 0; i < dealerCards.length; i++) {
-      $newCard = Html.createCard(Object.keys(dealerCards[i][0]),dealerCards[i][1].suit,'dealerCard');
+      $newCard = Html.createCard(Object.keys(dealerCards[i][0]),dealerCards[i][1].suit,'card');
       $('#dealer').append($newCard);
     }
     $('#hitButton').attr("disabled", false);
     $('#stayButton').attr("disabled", false);
-    $('#chips').attr("disabled", true);
+    $('#chipButton').attr("disabled", true);
   },
 
   showCardTotals: function() {
+    // $dealerTotal = $('<span></span>').attr('id','dealerTotal');
+    // $dealerTotal.addClass('cardTotal');
+    // $playerTotal = $('<span></span>').attr('id','playerTotal');
+    // $playerTotal.addClass('cardTotal');
+    // $('#dealer').prepend($dealerTotal);
+    // $('#player').prepend($playerTotal);
     $('#dealerTotal').text(App.calculateTotal(App.dealerCards));
     $('#playerTotal').text(App.calculateTotal(App.playerCards));
   },
 
   addCard: function(card, player) {
     //debugger;
-    $newCard = Html.createCard(Object.keys(card[0]),card[1].suit, player);
+    $newCard = Html.createCard(Object.keys(card[0]),card[1].suit, 'card');
     if (player === 'playerCard') {
       $('#player').append($newCard);
     } else {
@@ -267,7 +275,7 @@ var UI = {
   },
 
   endGame: function() {
-    debugger;
+    // debugger;
     console.log('Endgame start' + App.playerChipStack);
     // UI.updatePlayerStack();
     $('#hitButton').attr("disabled", true);
@@ -275,7 +283,7 @@ var UI = {
     $resetButton = $('<button></button>');
     $resetButton.attr('id','endGame');
     $resetButton.text('Reset Game');
-    $('body').append($resetButton);
+    $('#right').append($resetButton);
     $resetButton.on('click', function() {
       UI.reset();
       App.reset();
@@ -289,7 +297,7 @@ var UI = {
     $('#hitButton').attr("disabled", true);
     $('#stayButton').attr("disabled", true);
     $('#dealButton').attr("disabled", true);
-    $('#chips').attr("disabled", true);
+    $('#chipButton').attr("disabled", true);
     UI.showMessage('GAME OVER');
 
     return true;
