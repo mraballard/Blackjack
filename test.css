@@ -1,6 +1,8 @@
 body {
   display: flex;
   flex-direction: row;
+  background-image: url('images/felt.jpg');
+  font-family: Calibri;
   /*width: 100vw;*/
   /*justify-content: space-between;*/
 }
@@ -37,6 +39,18 @@ aside {
   /*height: 40vh;*/
   background: white;
 }
+
+.playerChips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#chipButton {
+  font-size: 3em;
+}
+#chipValue {
+  display: block;
+}
 main {
   background: grey;
   height: 100vh;
@@ -64,10 +78,20 @@ h1 {
   background: blue;
 }
 .card {
-  background: green;
+  /*background: green;*/
   width: 42px;
   height: 59px;
-  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+  /*border: 1px solid black;*/
+}
+#aclubs {
+  position: absolute;
+}
+#khearts {
+  position: absolute;
+  top: -59px;
+  left: -42px;
 }
 
 .cardTotal {
