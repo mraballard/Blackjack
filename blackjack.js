@@ -102,10 +102,28 @@ var App = {
     // debugger;
     this.playerCards.push(this.dealCard());
     UI.addCard(this.playerCards[this.playerCards.length-1], 'playerCard');
-    UI.showCardTotals();
-    if (this.calculateTotal(this.playerCards) > 21) {
-      this.bust('Player');
+    if (this.calculateTotal(this.playerCards) > 21) {  //check to see if card count > 21
+      var aceCount = 0;
+
+      this.playerCards.forEach(function(index) { //loop to check if hand contains ace
+          console.log(Object.keys(index[0]));
+        if (Object.keys(index[0])[0] === 'a'){
+          aceCount ++;
+          console.log(aceCount);
+        }
+      });
+        if (aceCount >= 1) { //Chanes ALL aces to value 1
+        this.playerCards.forEach(function(index) {
+          if (Object.keys(index[0])[0] === 'a') {
+            index[0]['a'] = 1;
+          }
+        });
+      }
+      if (this.calculateTotal(this.playerCards) > 21) {
+        this.bust('Player');
+      }
     }
+    UI.showCardTotals();
   },
 
   //stay
