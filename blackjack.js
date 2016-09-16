@@ -197,6 +197,7 @@ var UI = {
     // debugger;
     $('#dealButton').on('click', function(){
       App.initialDeal();
+      $('#dealButton').attr("disabled", true);
     });
     $('#dealButton').attr("disabled", true);
   },
