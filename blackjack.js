@@ -3,11 +3,12 @@
 var App = {
 //create deck
   deck : [],
-  suits: ['Hearts','Diamonds','Clubs','Spades'],
-  hearts : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
-  diamonds : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
-  clubs : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
-  spades : [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ],
+  spades : [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ],
+  hearts : [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ],
+  diamonds : [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ],
+  clubs : [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ],
+  suits: ['spades','hearts','diamonds','clubs'],
+  cardMap: [['a','k','q','j','10','9','8','7','6','5','4','3','2'],['a','k','q','j','10','9','8','7','6','5','4','3','2'],['a','k','q','j','10','9','8','7','6','5','4','3','2'],['a','k','q','j','10','9','8','7','6','5','4','3','2']],
 
   //create player, dealer, stack, pot variables
   playerCards : [],
@@ -22,10 +23,10 @@ var App = {
     App.potValue = 0;
     App.playerCards = [];
     App.dealerCards = [];
-    App.hearts = [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ];
-    App.diamonds = [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ];
-    App.clubs = [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ];
-    App.spades = [ {'2':2}, {'3':3}, {'4':4}, {'5':5}, {'6':6}, {'7':7}, {'8':8}, {'9':9}, {'10':10}, {'J': 10}, {'Q': 10}, {'K': 10}, {'A': 11} ];
+    App.spades = [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ];
+    App.hearts = [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ];
+    App.diamonds = [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ];
+    App.clubs = [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ];
   },
 
   buildDeck: function() {
@@ -58,8 +59,8 @@ var App = {
     var suit = Math.floor(Math.random()*4);  //0: hearts, 1: diamonds, 2: clubs, 3: spades
     var card = Math.floor(Math.random()*App.deck[suit].length);
     var dealtCard = [];
-    dealtCard.push(App.deck[suit][card]); //adds random card to array
-    dealtCard.push({'suit': App.suits[suit]}); //add random suit of card to array
+    dealtCard.push(App.deck[suit][card]); //adds random card to dealtCard array
+    dealtCard.push({'suit': suit}); //add random suit of card to dealtCard array
     App.deck[suit].splice(card,1);  //removes dealtCard from deck
 
     return dealtCard;
@@ -183,7 +184,7 @@ var UI = {
 
   //chip click calls App.bet()
   onChipClick: function() {
-    console.log('chip clicked');
+    // console.log('chip clicked');
     $('#chipButton').on('click', function(){
       $('#dealButton').attr("disabled", false);
       nickel = parseInt($('#chipButton').attr("data-set-id"));
@@ -242,7 +243,7 @@ var UI = {
 
   //show value of player's bet
   showBet: function(bet) {
-    console.log(bet);
+    // console.log(bet);
     //called by App.placeBet() to update DOM with bet
     var $pot = $('#potTotal');
     $pot.text('$'+bet);
@@ -252,12 +253,15 @@ var UI = {
   deal: function(playerCards, dealerCards) {
     //debugger;
     for (var i = 0; i < playerCards.length; i++) {
-      $newCard= Html.createCard(Object.keys(playerCards[i][0]),playerCards[i][1].suit,'card');
-      $('#player').append($newCard);
+      // debugger;
+      UI.addCard(playerCards[i],'playerCard');
+      // $newCard= Html.createCard(Object.keys(playerCards[i][0]),playerCards[i][1].suit,'card');
+      // $('#player').append($newCard);
     }
     for (var i = 0; i < dealerCards.length; i++) {
-      $newCard = Html.createCard(Object.keys(dealerCards[i][0]),dealerCards[i][1].suit,'card');
-      $('#dealer').append($newCard);
+      UI.addCard(dealerCards[i],'dealerCard');
+      // $newCard = Html.createCard(Object.keys(dealerCards[i][0]),dealerCards[i][1].suit,'card');
+      // $('#dealer').append($newCard);
     }
     $('#hitButton').attr("disabled", false);
     $('#stayButton').attr("disabled", false);
@@ -275,11 +279,21 @@ var UI = {
     $('#playerTotal').text(App.calculateTotal(App.playerCards));
   },
 
-  addCard: function(card, player) {
-    //debugger;
-    $newCard = Html.createCard(Object.keys(card[0]),card[1].suit, 'card');
-    if (player === 'playerCard') {
-      $('#player').append($newCard);
+  addCard: function(card, whichPlayer) {
+    // debugger;
+    var $suit = card[1].suit; //suit of card
+    var coordinateY = ($suit * -59)+'px'; //calculate Y coordinate of suit on sprite
+    var $cardFace = Object.keys(card[0]); //face of card
+    var coordinateX = (App.cardMap[$suit].indexOf($cardFace[0]) * (-42))+ 'px'; //calculate X coordinate of cardface on sprite
+    var uniqueImageId = 'img'+ $suit + $cardFace;  //create a unique ID for the image sprite in order to assign unique coordinates.
+
+    var $newCard = Html.createCard('card'); //create card DIV
+    var $cardImage = $(`<img id=${uniqueImageId}>`); //create image element with unique ID
+    $cardImage.attr('src', 'images/cards_sprite.png'); //assign image source for sprite
+    $cardImage.css({position: 'absolute', 'top': coordinateY, 'left': coordinateX}); //assign unique CSS location to imageID
+    $newCard.append($cardImage); //append image element to card DIV
+    if (whichPlayer === 'playerCard') {
+      $('#player').append($newCard); //append card DIV to player or dealer hand
     } else {
       $('#dealer').append($newCard);
     }
@@ -287,7 +301,7 @@ var UI = {
 
   endGame: function() {
     // debugger;
-    console.log('Endgame start' + App.playerChipStack);
+    // console.log('Endgame start' + App.playerChipStack);
     // UI.updatePlayerStack();
     $('#hitButton').attr("disabled", true);
     $('#stayButton').attr("disabled", true);
@@ -317,10 +331,10 @@ var UI = {
 
 /////////////////HTML
 var Html = {
-  createCard: function(value, suit, className) {
+  createCard: function(className) {
     var $newCard = $('<div></div>');
     $newCard.addClass(className);
-    $newCard.html(value + suit);
+
     return $newCard;
   }
 };

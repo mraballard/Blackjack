@@ -78,20 +78,10 @@ h1 {
   background: blue;
 }
 .card {
-  /*background: green;*/
   width: 42px;
   height: 59px;
   position: relative;
   overflow: hidden;
-  /*border: 1px solid black;*/
-}
-#aclubs {
-  position: absolute;
-}
-#khearts {
-  position: absolute;
-  top: -59px;
-  left: -42px;
 }
 
 .cardTotal {
