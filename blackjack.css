@@ -1,15 +1,12 @@
 @keyframes dealCard {
-    0%   {position: absolute; right:0px; top:0px;}
-    15%  {transform: rotate(45deg) scale(2) rotateX(90deg) rotateY(180deg);}
-    35% {transform: rotate(90deg) scale(2) rotateX(180deg) rotateY(240deg);}
-    55%  {transform: rotate(180deg) scale(2) rotateX(240deg) rotateY(360deg);}
-    75%  {transform: rotate(240deg) scale(2) rotateX(360deg) rotateY(45deg);}
-    /*85%  {transform: rotate(360deg) scale(2) rotateX(45deg) rotateY(90deg);}*/
-    /*65%  {transform: rotate(45deg) scale(2) rotateX(90deg) rotateY(240deg);}
-    75%  {transform: rotate(90deg) scale(2) rotateX(180deg) rotateY(360deg);}
-    85%  {transform: rotate(180deg) scale(2) rotateX(240deg) rotateY(45deg);}*/
-    90%  {transform: rotate(240deg) scale(2) rotateX(180deg) rotateY(90deg);}
-    100% {position: absolute; right:300px; top:350px;}
+    0%   {position: relative; top: -500px; right: -300px;}
+    15%  {transform: rotate(45deg) scale(2) rotateX(360deg) rotateY(360deg);}
+    30% {transform: rotate(90deg) scale(3) rotateX(360deg) rotateY(360deg);}
+    45%  {transform: rotate(135deg) scale(4) rotateX(360deg) rotateY(360deg);}
+    60%  {transform: rotate(180deg) scale(5) rotateX(360deg) rotateY(360deg);}
+    75%  {transform: rotate(225deg) scale(4) rotateX(360deg) rotateY(360deg);}
+    85%  {transform: rotate(270deg) scale(3) rotateX(360deg) rotateY(360deg);}
+    100% {position: relative; top: 0px; right: 0px;}
 }
 
 body {
@@ -105,7 +102,7 @@ h1 {
   position: relative;
   overflow: hidden;
   animation-name: dealCard;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   /*animation-direction: normal;*/
 }
 
@@ -147,10 +144,13 @@ h1 {
 }
 
 #endGame {
-  background: black;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 40px;
   height: 10vw;
-  width: 10vw;
-  margin: 5vh auto;
+  width: 50vw;
   text-align: center;
   color: white;
   font-size: 1em;

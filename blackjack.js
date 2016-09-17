@@ -62,12 +62,15 @@ var App = {
       initialDeal.push(this.dealCard());
       if (i%2 === 0) {
         this.playerCards.push(initialDeal[i]);
+        UI.addCard(initialDeal[i],'playerCard');
       } else {
         this.dealerCards.push(initialDeal[i]);
+        UI.addCard(initialDeal[i],'dealerCard');
       }
     }
-    UI.deal(this.playerCards,this.dealerCards);
+    // UI.deal(this.playerCards,this.dealerCards);
     UI.showCardTotals();
+    UI.toggleButtons();
     if (this.calculateTotal(this.playerCards) === 21) {
       this.blackJack();
     }
@@ -135,7 +138,9 @@ var App = {
     this.playerChipStack = this.playerChipStack +(this.potValue * 2);
     UI.updatePlayerStack();
     UI.showMessage('Blackjack!!! You now have $'+this.playerChipStack);
-    UI.endGame();
+    setTimeout(function() {
+      UI.endGame()
+    }, 1000);
   },
 
   //win function adds pot x2 to player's chips
@@ -143,16 +148,22 @@ var App = {
     this.playerChipStack = this.playerChipStack +(this.potValue * 2);
     UI.updatePlayerStack();
     UI.showMessage('You win! You now have $'+this.playerChipStack);
-    UI.endGame();
+    setTimeout(function() {
+      UI.endGame()
+    }, 1000);
   },
 
   dealerWins: function() {
     UI.showMessage('Dealer wins!');
     if (this.playerChipStack > 0) {
-      UI.endGame();
+      setTimeout(function() {
+        UI.endGame()
+      }, 1000);
     }
     else {
-      UI.gameOver();
+      setTimeout(function() {
+        UI.gameOver()
+      }, 1000);
     }
   },
 
@@ -160,10 +171,14 @@ var App = {
   bust: function(player) {
     UI.showMessage(player + ' busts!');
     if (this.playerChipStack > 0) {
-      UI.endGame();
+      setTimeout(function() {
+        UI.endGame()
+      }, 1000);
     }
     else {
-      UI.gameOver();
+      setTimeout(function() {
+        UI.gameOver()
+      }, 1000);
     }
   },
 
@@ -172,7 +187,9 @@ var App = {
     this.playerChipStack += this.potValue;
     UI.updatePlayerStack();
     UI.showMessage('Push');
-    UI.endGame();
+    setTimeout(function() {
+      UI.endGame()
+    }, 1000);
   },
 
 };
@@ -244,13 +261,7 @@ var UI = {
   },
 
   //show dealt cards for player and dealer
-  deal: function(playerCards, dealerCards) {
-    for (var i = 0; i < playerCards.length; i++) {
-      this.addCard(playerCards[i],'playerCard');
-    }
-    for (var i = 0; i < dealerCards.length; i++) {
-      this.addCard(dealerCards[i],'dealerCard');
-    }
+  toggleButtons: function() {
     $('#hitButton').attr("disabled", false);
     $('#stayButton').attr("disabled", false);
     $('#chipButton').attr("disabled", true);
@@ -262,21 +273,25 @@ var UI = {
   },
 
   addCard: function(card, whichPlayer) {
-    var $suit = card[1].suit; //suit of card
-    var coordinateY = ($suit * -59)+'px'; //calculate Y coordinate of suit on sprite
-    var $cardFace = Object.keys(card[0]); //face of card
-    var coordinateX = (App.cardMap[$suit].indexOf($cardFace[0]) * (-42))+ 'px'; //calculate X coordinate of cardface on sprite
-    var uniqueImageId = 'img'+ $suit + $cardFace;  //create a unique ID for the image sprite in order to assign unique coordinates.
+      //Working with Sprites
+        var $suit = card[1].suit; //suit of card
+        var coordinateY = ($suit * -59)+'px'; //calculate Y coordinate of suit on sprite
+        var $cardFace = Object.keys(card[0]); //face of card
+        var coordinateX = (App.cardMap[$suit].indexOf($cardFace[0]) * (-42))+ 'px'; //calculate X coordinate of cardface on sprite
+        var uniqueImageId = 'img'+ $suit + $cardFace;  //create a unique ID for the image sprite in order to assign unique coordinates.
 
-    var $newCard = Html.createCard('card'); //create card DIV
-    var $cardImage = $(`<img id=${uniqueImageId}>`); //create image element with unique ID
-    $cardImage.attr('src', 'images/cards_sprite.png'); //assign image source for sprite
-    $cardImage.css({position: 'absolute', 'top': coordinateY, 'left': coordinateX}); //assign unique CSS location to imageID
+        var $newCard = Html.createCard('card'); //create card DIV
+        var $cardImage = $(`<img id=${uniqueImageId}>`); //create image element with unique ID
+        $cardImage.attr('src', 'images/cards_sprite.png'); //assign image source for sprite
+        $cardImage.css({position: 'absolute', 'top': coordinateY, 'left': coordinateX}); //assign unique CSS location to imageID
+    //Append card element to DOM
     $newCard.append($cardImage); //append image element to card DIV
-    if (whichPlayer === 'playerCard') {
-      $('#player').append($newCard); //append card DIV to player or dealer hand
-    } else {
-      $('#dealer').append($newCard);
+    switch (whichPlayer) {
+      case 'playerCard':
+        $('#player').append($newCard); //append card DIV to player or dealer hand
+        break;
+      default:
+        $('#dealer').append($newCard);
     }
   },
 
@@ -286,7 +301,7 @@ var UI = {
     $resetButton = $('<button></button>');
     $resetButton.attr('id','endGame');
     $resetButton.text('New Game');
-    $('#right').append($resetButton);
+    $('body').append($resetButton);
     $resetButton.on('click', function() {
       UI.reset();
       App.reset();
