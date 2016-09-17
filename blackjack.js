@@ -62,10 +62,10 @@ var App = {
       initialDeal.push(this.dealCard());
       if (i%2 === 0) {
         this.playerCards.push(initialDeal[i]);
-        UI.addCard(initialDeal[i],'playerCard');
+          UI.addCard(initialDeal[i],'playerCard');
       } else {
         this.dealerCards.push(initialDeal[i]);
-        UI.addCard(initialDeal[i],'dealerCard');
+          UI.addCard(initialDeal[i],'dealerCard');
       }
     }
     // UI.deal(this.playerCards,this.dealerCards);
@@ -191,7 +191,6 @@ var App = {
       UI.endGame()
     }, 1000);
   },
-
 };
 
 /////////////////UI LOGIC
@@ -288,10 +287,10 @@ var UI = {
     $newCard.append($cardImage); //append image element to card DIV
     switch (whichPlayer) {
       case 'playerCard':
-        $('#player').append($newCard); //append card DIV to player or dealer hand
+          $('#player').append($newCard); //append card DIV to player or dealer hand
         break;
       default:
-        $('#dealer').append($newCard);
+        $('#dealer').append($newCard); //append card DIV to player or dealer hand
     }
   },
 

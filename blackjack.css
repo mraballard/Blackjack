@@ -14,6 +14,8 @@ body {
   flex-direction: row;
   background-image: url('images/felt.jpg');
   font-family: Calibri;
+  background-repeat: no-repeat;
+  background-size: cover;
   /*width: 100vw;*/
   /*justify-content: space-between;*/
 }
@@ -145,15 +147,16 @@ h1 {
 
 #endGame {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 5px;
+  right: 150px;
   background: rgba(255, 0, 0, 0.1);
   border-radius: 40px;
-  height: 10vw;
-  width: 50vw;
+  height: 5vw;
+  width: 30vw;
   text-align: center;
   color: white;
   font-size: 1em;
+  margin-top: 5px;
 }
 
 .green {
