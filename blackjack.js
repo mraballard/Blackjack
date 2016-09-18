@@ -331,6 +331,13 @@ var UI = {
     $('#dealButton').attr("disabled", true);
     $('#chipButton').attr("disabled", true);
     this.showMessage('GAME OVER');
+    $resetButton = $('<button></button>');
+    $resetButton.attr('id','endGame');
+    $resetButton.text('New Game');
+    $('body').append($resetButton);
+    $resetButton.on('click', function() {
+      location.reload();
+    });
 
     return true;
   }
