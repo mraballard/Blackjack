@@ -12,6 +12,8 @@ var App = {
     this.potValue = 0;
     this.playerCards = [];
     this.dealerCards = [];
+    this.cardCount = 0;  //counts how many cards have been dealt.
+
     this.spades = [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ];
     this.hearts = [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ];
     this.diamonds = [ {'a': 11}, {'k': 10}, {'q': 10}, {'j': 10}, {'10': 10}, {'9': 9}, {'8': 8}, {'7': 7}, {'6': 6}, {'5': 5}, {'4': 4}, {'3': 3}, {'2': 2} ];
@@ -60,6 +62,7 @@ var App = {
     var initialDeal = [];
     for (var i = 0; i < 4; i++) {
       initialDeal.push(this.dealCard());
+      this.cardCount ++;
       if (i%2 === 0) {
         this.playerCards.push(initialDeal[i]);
           UI.addCard(initialDeal[i],'playerCard');
@@ -69,7 +72,7 @@ var App = {
       }
     }
     // UI.deal(this.playerCards,this.dealerCards);
-    UI.showCardTotals();
+    UI.showPlayerTotal();
     UI.toggleButtons();
     if (this.calculateTotal(this.playerCards) === 21) {
       this.blackJack();
@@ -110,13 +113,14 @@ var App = {
     if (this.calculateTotal(this.playerCards) > 21) {
       this.bust('Player');
     }
-    UI.showCardTotals();
+    UI.showPlayerTotal();
   },
 
   stay: function() {
     this.aceCheck(this.dealerCards);
     var dealerTotal = this.calculateTotal(this.dealerCards);
     var playerTotal = this.calculateTotal(this.playerCards)
+    UI.showDealerTotal();
     if (dealerTotal > 21) {
       this.playerWins();
     }
@@ -126,7 +130,6 @@ var App = {
     else if (dealerTotal <= playerTotal) {
       this.dealerCards.push(this.dealCard());
       UI.addCard(this.dealerCards[this.dealerCards.length-1], 'dealerCard');
-      UI.showCardTotals();
       this.stay();
     }
     else {
@@ -266,23 +269,35 @@ var UI = {
     $('#chipButton').attr("disabled", true);
   },
 
-  showCardTotals: function() {
+  showDealerTotal: function() {
     $('#dealerTotal').text(App.calculateTotal(App.dealerCards));
+    var $card = $('#dealer').children().eq(1).children().eq(0);  //selects dealers hidden card element
+    $card.css({position: 'absolute', 'top': App.dealerCardCoordinateY, 'left': App.dealerCardCoordinateX});
+  },
+
+  showPlayerTotal: function() {
     $('#playerTotal').text(App.calculateTotal(App.playerCards));
   },
 
   addCard: function(card, whichPlayer) {
       //Working with Sprites
-        var $suit = card[1].suit; //suit of card
-        var coordinateY = ($suit * -59)+'px'; //calculate Y coordinate of suit on sprite
-        var $cardFace = Object.keys(card[0]); //face of card
-        var coordinateX = (App.cardMap[$suit].indexOf($cardFace[0]) * (-42))+ 'px'; //calculate X coordinate of cardface on sprite
-        var uniqueImageId = 'img'+ $suit + $cardFace;  //create a unique ID for the image sprite in order to assign unique coordinates.
-
-        var $newCard = Html.createCard('card'); //create card DIV
-        var $cardImage = $(`<img id=${uniqueImageId}>`); //create image element with unique ID
-        $cardImage.attr('src', 'images/cards_sprite.png'); //assign image source for sprite
+      // debugger;
+      var $suit = card[1].suit; //suit of card
+      var $cardFace = Object.keys(card[0]); //face of card
+      var uniqueImageId = 'img'+ $suit + $cardFace;  //create a unique ID for the image sprite in order to assign unique coordinates.
+          var coordinateY = ($suit * -59)+'px'; //calculate Y coordinate of suit on sprite
+          var coordinateX = (App.cardMap[$suit].indexOf($cardFace[0]) * (-42))+ 'px'; //calculate X coordinate of
+      var $newCard = Html.createCard('card'); //create card DIV
+      var $cardImage = $(`<img id=${uniqueImageId}>`); //create image element with unique ID
+      $cardImage.addClass('visible');
+      $cardImage.attr('src', 'images/cards_sprite.png'); //assign image source for sprite
+      if (App.cardCount === 2) {
+        App.dealerCardCoordinateX = coordinateX;
+        App.dealerCardCoordinateY = coordinateY;
+        $cardImage.css({position: 'absolute', 'top': '0px', 'left': '-546px'}); //assign unique CSS location to imageID
+      } else {
         $cardImage.css({position: 'absolute', 'top': coordinateY, 'left': coordinateX}); //assign unique CSS location to imageID
+      }
     //Append card element to DOM
     $newCard.append($cardImage); //append image element to card DIV
     switch (whichPlayer) {
