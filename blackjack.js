@@ -338,8 +338,6 @@ var UI = {
     $resetButton.on('click', function() {
       location.reload();
     });
-
-    return true;
   }
 };
 
