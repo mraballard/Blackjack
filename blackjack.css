@@ -1,11 +1,9 @@
 @keyframes dealCard {
     0%   {position: relative; top: -500px; right: -300px;}
-    15%  {transform: rotate(45deg) scale(2) rotateX(360deg) rotateY(360deg);}
-    30% {transform: rotate(90deg) scale(3) rotateX(360deg) rotateY(360deg);}
-    45%  {transform: rotate(135deg) scale(4) rotateX(360deg) rotateY(360deg);}
-    60%  {transform: rotate(180deg) scale(5) rotateX(360deg) rotateY(360deg);}
-    75%  {transform: rotate(225deg) scale(4) rotateX(360deg) rotateY(360deg);}
-    85%  {transform: rotate(270deg) scale(3) rotateX(360deg) rotateY(360deg);}
+    20%  {transform: rotate(90deg) scale(2) rotateX(90deg) rotateY(90deg);}
+    40% {transform: rotate(180deg) scale(3) rotateX(180deg) rotateY(180deg);}
+    60%  {transform: rotate(270deg) scale(4) rotateX(270deg) rotateY(270deg);}
+    80%  {transform: rotate(360deg) scale(2) rotateX(360deg) rotateY(360deg);}
     100% {position: relative; top: 0px; right: 0px;}
 }
 
@@ -16,75 +14,54 @@ body {
   font-family: Calibri;
   background-repeat: no-repeat;
   background-size: cover;
-  /*width: 100vw;*/
-  /*justify-content: space-between;*/
 }
 
-div {
-  /*border: 1px solid black;*/
-}
 aside {
-  /*background: pink;*/
   height: 100vh;
-  width: 20vw;
+  width: 15vw;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 }
 
 #right {
   justify-content: center;
-  width: 30vw;
 }
 #left {
   justify-content: flex-end;
-  width: 30vw;
   align-items: center;
 }
-#dealButtonDiv {
-  /*display: flex;
-  align-items: flex-end;*/
-  /*height: 20vh;*/
-  /*background: white;*/
-  margin: 30% auto 0 auto;
-}
-#actionButtons {
-  /*display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: flex-end;*/
-  /*height: 40vh;*/
-  /*background: white;*/
-}
 
+button {
+  width: 15vw;
+  height: 5vw;
+  font-size: 1.2em;
+  margin: 0px auto 20px auto;
+  background-color: rgba(52, 166, 51, 0.2);
+  border-radius: 10px;
+  border: 1px solid white;
+  color: white;
+
+}
 .playerChips {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-#dealButton {
-  align-self: flex-start;
-}
-#hitButton {
-  align-self: flex-start;
-}
-#stayButton {
-  align-self: flex-start;
-  margin-bottom: 10%;
-}
+
 #chipValue {
   display: block;
 }
 main {
-  /*background: grey;*/
   height: 100vh;
-  width: 50vmin;
+  width: 70vmin;
   display: flex;
   flex-direction: column;
 }
 h1 {
+  margin-top: 15%;
   text-align: center;
+  font-size: 2em;
   font-family: Helvetica;
   color: white;
 }
@@ -130,8 +107,7 @@ h1 {
   float: right;
   width: 15vmin;
   height: 15vmin;
-  /*background: red;*/
-  font-size: 3em;
+  font-size: 2.5em;
   text-align: center;
   color: white;
 }
@@ -157,45 +133,4 @@ h1 {
   color: white;
   font-size: 1em;
   margin-top: 5px;
-}
-
-.green {
-	-moz-box-shadow:inset 0px 1px 0px 0px #a5db77;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #a5db77;
-	box-shadow:inset 0px 1px 0px 0px #a5db77;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811));
-	background:-moz-linear-gradient(top, #77d42a 5%, #5cb811 100%);
-	background:-webkit-linear-gradient(top, #77d42a 5%, #5cb811 100%);
-	background:-o-linear-gradient(top, #77d42a 5%, #5cb811 100%);
-	background:-ms-linear-gradient(top, #77d42a 5%, #5cb811 100%);
-	background:linear-gradient(to bottom, #77d42a 5%, #5cb811 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811',GradientType=0);
-	background-color:#77d42a;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #268a16;
-	display:inline-block;
-	cursor:pointer;
-	color:#306108;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #aade7c;
-}
-.green:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a));
-	background:-moz-linear-gradient(top, #5cb811 5%, #77d42a 100%);
-	background:-webkit-linear-gradient(top, #5cb811 5%, #77d42a 100%);
-	background:-o-linear-gradient(top, #5cb811 5%, #77d42a 100%);
-	background:-ms-linear-gradient(top, #5cb811 5%, #77d42a 100%);
-	background:linear-gradient(to bottom, #5cb811 5%, #77d42a 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a',GradientType=0);
-	background-color:#5cb811;
-}
-.green:active {
-	position:relative;
-	top:1px;
 }

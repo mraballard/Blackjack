@@ -38,7 +38,7 @@ var App = {
       this.playerChipStack -= chip;
       this.potValue += chip;
       UI.updatePlayerStack();
-      UI.showMessage("Add to your Bet, or click 'Deal!'");
+      UI.showMessage("Bet more or Deal!");
       UI.showBet(this.potValue);
     }
   },
@@ -150,7 +150,7 @@ var App = {
   playerWins: function() {
     this.playerChipStack = this.playerChipStack +(this.potValue * 2);
     UI.updatePlayerStack();
-    UI.showMessage('You win! You now have $'+this.playerChipStack);
+    UI.showMessage('Big winner!');
     setTimeout(function() {
       UI.endGame()
     }, 1000);
@@ -212,6 +212,7 @@ var UI = {
   //deal click calls App.initialDeal function
   onDealButton: function() {
     $('#dealButton').on('click', function(){
+      UI.showMessage("Let's do it");
       App.initialDeal();
       $('#dealButton').attr("disabled", true);
     });
