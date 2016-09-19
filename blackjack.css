@@ -28,7 +28,7 @@ aside {
   position: fixed;
   color: white;
   font-size: 3em;
-  right: -40px;
+  right: -80px;
   top: 150px;
   transform: rotate(90deg);
   letter-spacing: 8px;
@@ -73,8 +73,9 @@ h1 {
   margin-top: 15%;
   text-align: center;
   font-size: 2em;
-  font-family: Helvetica;
+  font-family: Arial;
   color: white;
+  letter-spacing: 2px;
 }
 .cardSection {
   display: flex;
@@ -99,6 +100,7 @@ h1 {
 .cardTotal {
   /*background: orange;*/
   align-self: flex-start;
+  /*margin-left: 30%;*/
   text-align: right;
   font-size: 3em;
   color: white;
@@ -109,16 +111,16 @@ h1 {
   height: 15vmin;
   background: green;
   border-radius: 50%;
+  border: 5px solid white;
   text-align: center;
   color: white;
   font-size: 2em;
 }
 
 #pot {
-  float: right;
   width: 15vmin;
   height: 15vmin;
-  font-size: 2.5em;
+  font-size: 2em;
   text-align: center;
   color: white;
 }
