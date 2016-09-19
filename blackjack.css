@@ -27,6 +27,7 @@ aside {
 .vertical-text {
   position: fixed;
   color: white;
+  text-shadow: 2px 2px 2px #111111;
   font-size: 3em;
   right: -80px;
   top: 150px;
@@ -75,7 +76,8 @@ h1 {
   font-size: 2em;
   font-family: Arial;
   color: white;
-  letter-spacing: 2px;
+  text-shadow: 5px 5px 5px #111111;
+  letter-spacing: 5px;
 }
 .cardSection {
   display: flex;
@@ -102,6 +104,7 @@ h1 {
   align-self: flex-start;
   /*margin-left: 30%;*/
   text-align: right;
+  text-shadow: 4px 4px 5px #111111;
   font-size: 3em;
   color: white;
 }
@@ -114,6 +117,7 @@ h1 {
   border: 5px solid white;
   text-align: center;
   color: white;
+  text-shadow: 3px 3px 5px #111111;
   font-size: 2em;
 }
 
@@ -128,6 +132,7 @@ h1 {
 #potTotal {
   color: white;
   font-size: 2em;
+  text-shadow: 4px 4px 5px #111111;
 }
 #chipValue {
   color: white;
