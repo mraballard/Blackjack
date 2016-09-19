@@ -1,7 +1,7 @@
 /////////////////APP LOGIC
 
 var App = {
-  //cardmap for located card on sprite in UI.addCard()
+  //cardmap for locating card on sprite in UI.addCard()
   cardMap:  [['a','k','q','j','10','9','8','7','6','5','4','3','2'],['a','k','q','j','10','9','8','7','6','5','4','3','2'],['a','k','q','j','10','9','8','7','6','5','4','3','2'],['a','k','q','j','10','9','8','7','6','5','4','3','2']],
   playerChipStack : 100,
   noChips : false,
@@ -21,7 +21,6 @@ var App = {
   },
 
   buildDeck: function() {
-
     this.deck.push(this.hearts, this.diamonds, this.clubs, this.spades);
   },
 
@@ -58,12 +57,12 @@ var App = {
 
   //initial deal function
   initialDeal: function() {
-    this.buildDeck();
+    this.buildDeck();  //builds full deck
     var initialDeal = [];
     for (var i = 0; i < 4; i++) {
-      initialDeal.push(this.dealCard());
+      initialDeal.push(this.dealCard());  //deals random card
       this.cardCount ++;
-      if (i%2 === 0) {
+      if (i%2 === 0) {  //everyother card goes to dealer/player
         this.playerCards.push(initialDeal[i]);
           UI.addCard(initialDeal[i],'playerCard');
       } else {
@@ -95,7 +94,7 @@ var App = {
           aceCount ++;
         }
       });
-      if (aceCount >= 1) { //Chanes ALL aces to value 1
+      if (aceCount >= 1) { //Changes ALL aces to value 1
         hand.forEach(function(index) {
           if (Object.keys(index[0])[0] === 'a') {
             index[0]['a'] = 1;
@@ -282,7 +281,6 @@ var UI = {
 
   addCard: function(card, whichPlayer) {
       //Working with Sprites
-      // debugger;
       var $suit = card[1].suit; //suit of card
       var $cardFace = Object.keys(card[0]); //face of card
       var uniqueImageId = 'img'+ $suit + $cardFace;  //create a unique ID for the image sprite in order to assign unique coordinates.
