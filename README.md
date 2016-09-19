@@ -12,6 +12,5 @@ Displaying cards was difficult,  I decided to create a cardmap array as a coordi
 Unsolved features:
   - Once hand value passes 21, any and all aces in the hand are changed to value 1 instead of checking if the hand would be improved with one ace as 11 and the other as 1.
   - No split hand
-  - Double Down
   - Insurance
   - Display odds/strategy
