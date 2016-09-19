@@ -22,8 +22,17 @@ aside {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 }
-
+.vertical-text {
+  position: fixed;
+  color: white;
+  font-size: 3em;
+  right: -40px;
+  top: 150px;
+  transform: rotate(90deg);
+  letter-spacing: 8px;
+}
 #right {
   justify-content: center;
 }
@@ -35,12 +44,14 @@ aside {
 button {
   width: 15vw;
   height: 5vw;
-  font-size: 1.2em;
+  font-size: 80%;
   margin: 0px auto 20px auto;
   background-color: rgba(52, 166, 51, 0.2);
   border-radius: 10px;
   border: 1px solid white;
   color: white;
+  letter-spacing: 3px;
+  font-weight: bold;
 
 }
 .playerChips {
