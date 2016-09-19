@@ -7,7 +7,7 @@ For planning I used wireframes and trello. My app includes jQuery, javascript, c
 
 Deck of cards: constructed using object-like arrays and is scalable.
 
-Displaying cards was difficult to figure out with sprites. I decided to create a cardmap array as a coordinate matrix for each card's location on the sprite image. As each card is delivered to the screen, it's location on the sprite is calculated dynamically.
+Displaying cards was difficult,  I decided to create a cardmap array as a coordinate matrix for each card's location on the sprite image. As each card is delivered to the screen, it's location on the sprite is calculated dynamically.
 
 Unsolved features:
   - Once hand value passes 21, any and all aces in the hand are changed to value 1 instead of checking if the hand would be improved with one ace as 11 and the other as 1.

@@ -96,6 +96,7 @@ h1 {
   overflow: hidden;
   animation-name: dealCard;
   animation-duration: 0.5s;
+  box-shadow: 3px 3px 3px #111111;
   /*animation-direction: normal;*/
 }
 
@@ -140,6 +141,19 @@ h1 {
 }
 
 #endGame {
+  position: fixed;
+  bottom: 5px;
+  right: 150px;
+  background: rgba(255, 0, 0, 0.1);
+  border-radius: 40px;
+  height: 5vw;
+  width: 30vw;
+  text-align: center;
+  color: white;
+  font-size: 1em;
+  margin-top: 5px;
+}
+#dd {
   position: fixed;
   bottom: 5px;
   right: 150px;

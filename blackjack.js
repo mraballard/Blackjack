@@ -73,6 +73,9 @@ var App = {
     // UI.deal(this.playerCards,this.dealerCards);
     UI.showPlayerTotal();
     UI.toggleButtons();
+    if ((App.potValue * 2) <= App.playerChipStack) {
+      UI.doubleDown();
+    }
     if (this.calculateTotal(this.playerCards) === 21) {
       this.blackJack();
     }
@@ -113,6 +116,20 @@ var App = {
       this.bust('Player');
     }
     UI.showPlayerTotal();
+  },
+
+  doubleDown: function() {
+    // debugger;
+      this.placeBet(this.potValue);
+      this.playerCards.push(this.dealCard());
+      UI.addCard(this.playerCards[this.playerCards.length-1], 'playerCard');
+      this.aceCheck(this.playerCards);
+      UI.showPlayerTotal();
+      if (this.calculateTotal(this.playerCards) > 21) {
+        this.bust('Player');
+      } else {
+        this.stay();
+      }
   },
 
   stay: function() {
@@ -221,6 +238,7 @@ var UI = {
   //hit click calls App.dealCard() to add card to player hand
   onHitButton: function() {
     $('#hitButton').on('click', function(){
+      $('#dd').remove();
       App.hit();
     });
     $('#hitButton').attr("disabled", true);
@@ -229,6 +247,7 @@ var UI = {
   //stay click calls App.stay() which adds cards to dealer's hand until player score is beat or dealer busts
   onStayButton: function() {
     $('#stayButton').on('click', function(){
+      $('#dd').remove();
       App.stay();
     });
     $('#stayButton').attr("disabled", true);
@@ -243,6 +262,17 @@ var UI = {
     $('#dealButton').attr("disabled", true);
     $('#endGame').remove();
     $('#chipButton').attr("disabled", false);
+  },
+
+  doubleDown: function() {
+      $doubleDownButton = $('<button></button>');
+      $doubleDownButton.attr('id','dd');
+      $doubleDownButton.text('DOUBLE DOWN');
+      $('body').append($doubleDownButton);
+      $doubleDownButton.on('click', function() {
+        $('#dd').remove();
+        App.doubleDown();
+      });
   },
 
   //show "place your bets" in h1
